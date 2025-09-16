@@ -3,8 +3,12 @@ import pickle
 import pandas as pd
 
 # Load the model
-with open('model.pkl', 'rb') as file:
-    model = pickle.load(file)
+try:
+    with open('model.pkl', 'rb') as file:
+        model = pickle.load(file)
+except FileNotFoundError:
+    st.error("❌ model.pkl not found. Please make sure it's in the same directory as app.py.")
+    st.stop()
 
 # Define the prediction function
 def predict_price(input_data):
@@ -15,12 +19,10 @@ def predict_price(input_data):
 # Set page config
 st.set_page_config(page_title="Smartphone Price Predictor", layout="centered")
 
-# Add banner with image
-st.banner(
-    title="📱 Smartphone Price Prediction",
-    caption="Estimate the price of a smartphone based on its features",
-    image="smartphones_image.jpg"
-)
+# Display banner image and title
+st.image("smartphones_image.jpg", use_column_width=True)
+st.markdown("## 📱 Smartphone Price Prediction")
+st.markdown("Estimate the price of a smartphone based on its features.")
 
 # Sidebar for inputs
 st.sidebar.header("🔧 Input Features")
@@ -72,6 +74,6 @@ input_data = {
 }
 
 # Prediction button
-if st.button('Predict Price'):
+if st.button('🔍 Predict Price'):
     predicted_price = predict_price(input_data)
-    st.success(f" Estimated Price: ₹{predicted_price:,.2f}")
+    st.success(f"💰 Estimated Price: ₹{predicted_price:,.2f}")
