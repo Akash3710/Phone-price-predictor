@@ -20,7 +20,7 @@ def predict_price(input_data):
 st.set_page_config(page_title="Smartphone Price Predictor", layout="centered")
 
 # Display banner image and title
-st.image("smartphones_image.jpg", use_column_width=True)
+st.image("smartphones_image.jpg", use_container_width=True)
 st.markdown("## 📱 Smartphone Price Prediction")
 st.markdown("Estimate the price of a smartphone based on its features.")
 
